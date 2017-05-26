@@ -12,7 +12,13 @@ public class FunctionExamplesTest {
   
   @Test
   public void testF() {
-    assertEquals(func("A", "B", "C", "D"), FunctionExamples.f().apply("A").apply("B").apply("C").apply("D"));
+    String result = FunctionExamples.f()
+        .apply("A")
+        .apply("B")
+        .apply("C")
+        .apply("D");
+
+    assertEquals(func("A", "B", "C", "D"), result);
   }
 
 }
