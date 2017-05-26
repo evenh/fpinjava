@@ -1,5 +1,6 @@
 package com.fpinjava.makingjavafunctional.exercise03_02;
 
-interface Supplier<T> {
+@FunctionalInterface
+public interface Supplier<T> {
   T get();
 }
