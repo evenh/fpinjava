@@ -1,7 +1,6 @@
 package com.fpinjava.makingjavafunctional.exercise03_07;
 
 import com.fpinjava.common.Function;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,20 +8,20 @@ import java.util.List;
 
 public class CollectionUtilities {
 
-  public static <T> List<T > list() {
+  public static <T> List<T> list() {
     return Collections.emptyList();
   }
 
-  public static <T> List<T > list(T t) {
+  public static <T> List<T> list(T t) {
     return Collections.singletonList(t);
   }
 
-  public static <T> List<T > list(List<T> ts) {
+  public static <T> List<T> list(List<T> ts) {
     return Collections.unmodifiableList(new ArrayList<>(ts));
   }
 
   @SafeVarargs
-  public static <T> List<T > list(T... t) {
+  public static <T> List<T> list(T... t) {
     return Collections.unmodifiableList(Arrays.asList(Arrays.copyOf(t, t.length)));
   }
 
@@ -33,7 +32,7 @@ public class CollectionUtilities {
     return list.get(0);
   }
 
-  private static <T> List<T > copy(List<T> ts) {
+  private static <T> List<T> copy(List<T> ts) {
     return new ArrayList<>(ts);
   }
 
@@ -46,9 +45,7 @@ public class CollectionUtilities {
     return Collections.unmodifiableList(workList);
   }
 
-  public static <T, U> U foldLeft(List<T> ts,
-                                  U identity,
-                                  Function<U, Function<T, U>> f) {
+  public static <T, U> U foldLeft(List<T> ts, U identity, Function<U, Function<T, U>> f) {
     U result = identity;
     for (T t : ts) {
       result = f.apply(result).apply(t);
@@ -56,10 +53,14 @@ public class CollectionUtilities {
     return result;
   }
 
-  public static <T, U> U foldRight(List<T> ts,
-                                   U identity,
-                                   Function<T, Function<U, U>> f) {
-    throw new RuntimeException("To be implemented");
+  public static <T, U> U foldRight(List<T> ts, U identity, Function<T, Function<U, U>> f) {
+    U result = identity;
+
+    for (int i = ts.size(); i > 0; i--) {
+      result = f.apply(ts.get(i - 1)).apply(result);
+    }
+
+    return result;
   }
 
   public static <T> List<T> append(List<T> list, T t) {
